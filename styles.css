@@ -1,0 +1,33 @@
+#cabecalho{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.botoes{
+    width: 100%;
+    height: 38px;
+    float: right;
+}
+
+.botoes button{
+    margin-left: 4px;
+    width: 150px;
+    float: right;
+}
+
+#botao-cancelar{
+    width: 100px;
+}
+
+#lista-pacientes-div{
+    margin-top: 10px;
+}
+
+#cabecalho{
+    margin-top: 35px;
+}
+
+.btn-act{
+    cursor: pointer;
+}

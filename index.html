@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Avaliação Devweb C2</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+</head>
+
+<body class="container">
+    <!--Novo paciente -->
+
+    <div id="cabecalho" class="row">
+        <div class="col text-center">
+            <p><strong>Avaliação C2</strong> - Ciência da Computação - FAESA 2020 <br><strong>Heleno Sales Mesquita</strong></p>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" onclick="ctrl.novo()">
+        +
+    </button>
+
+    <button type="button" class="btn btn-primary" onclick="ctrl.ordenar()">
+        Ordenar
+    </button>
+
+    <form id="salvarForm">
+        <!-- Modal -->
+        <div class="modal fade" id="paciente-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informe os dados do paciente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="incluir-div">
+
+                            <!-- Formulário de cadastros -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <input type="number" style="display: none;" id="id" name="id">
+
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label for="nome">Nome: </label>
+                                                <input type="text" class="form-control" id="nome" name="nome">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="celular">Celular: </label>
+                                                <input type="tel" class="form-control" id="celular" name="celular">
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="peso">Peso: </label>
+                                                <input type="number" class="form-control" id="peso" name="peso"
+                                                    step="0.01" min="0" max="400">
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="altura">Altura: </label>
+                                                <input type="number" class="form-control" id="altura" name="altura"
+                                                    name="peso" step="0.01" min="0" max="3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="endereco">Endereço: </label>
+                                        <textarea class="form-control" id="endereco" name="endereco"
+                                            rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="problemas-saude">Problemas de saúde: </label>
+                                        <textarea class="form-control" id="problemas-saude" name="problemasSaude"
+                                            rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="botao-cancelar" class="btn btn-secondary"
+                            data-dismiss="modal">Fechar</button>
+                        <button type="submit" id="botao-incluir" class="btn btn-primary" >Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Lista de pacientes -->
+    <div id="lista-pacientes-div">
+        <table id="lista-pacientes-table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col">Peso</th>
+                    <th scope="col">Altura</th>
+                    <!-- <th scope="col">#</th> -->
+                    <th scope="col">...</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div id="pacientes-lista-view-o">
+                    <!-- <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                        <td></td>
+                    </tr> -->
+                </div>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    
+    <script src="https://use.fontawesome.com/8ee156e676.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    
+    <script src="models/pessoa.js"></script>
+    <script src="repositorio.js"></script>
+
+    <script src="views/pessoas-view.js"></script>
+    <script src="controllers/pessoas-controller.js"></script>
+    
+    <script src="main.js"></script>
+</body>
+
+</html>
